@@ -66,7 +66,8 @@ class App extends Component {
   }
 
   async loadMobilenet() {
-    const modelURL = "/MobileNet-False-FIDS30-Dense256/model.json";
+    const modelURL =
+      "whats-this-fruit/MobileNet-False-FIDS30-Dense256/model.json";
     const mobilenet = await tf.loadModel(modelURL);
 
     return mobilenet;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import * as tf from "@tensorflow/tfjs";
 import { Webcam } from "./webcam";
-import classes from "./classes";
+import classes from "./classes2";
 
 let webcam;
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
 
     setInterval(() => {
       this.predict();
-    }, 2000);
+    }, 1000);
   }
 
   async predict() {
@@ -66,7 +66,7 @@ class App extends Component {
   }
 
   async loadMobilenet() {
-    const modelURL = "/vgg16/model.json";
+    const modelURL = "/MobileNet-False-FIDS30-Dense256/model.json";
     const mobilenet = await tf.loadModel(modelURL);
 
     return mobilenet;
@@ -85,15 +85,17 @@ class App extends Component {
           playsInline
           muted
           id="webcam"
-          width="100"
-          height="100"
+          width="224"
+          height="224"
           capture="environment"
         />
-        {!this.state.prediction && <h2>Loading the model..</h2>}
-        <h1>{this.state.prediction}</h1>
-        {this.state.prediction && (
-          <h2>Confidence: {this.state.confidence * 100}%</h2>
-        )}
+        <div className="text-container">
+          {!this.state.prediction && <h2>Loading the model..</h2>}
+          <p>{this.state.prediction}</p>
+          {this.state.prediction && (
+            <p>Confidence: {this.state.confidence * 100}%</p>
+          )}
+        </div>
       </div>
     );
   }
